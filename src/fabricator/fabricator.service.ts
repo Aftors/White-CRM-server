@@ -23,4 +23,8 @@ export class FabricatorService {
       include: { all: true },
     })
   }
+
+  async getAllFabricator() {
+    return await this.fabricatorRepository.findAll({ include: { all: true } })
+  }
 }

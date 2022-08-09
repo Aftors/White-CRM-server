@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common'
+import { Body, Controller, Get, Post } from '@nestjs/common'
 import { ApiOperation, ApiTags } from '@nestjs/swagger'
 import { FabricatorDto } from './dto/fabricator.dto'
 import { FabricatorService } from './fabricator.service'
@@ -12,5 +12,10 @@ export class FabricatorController {
   @Post('add')
   createFabricator(@Body() dto: FabricatorDto) {
     return this.fabricatorService.addFabricator(dto)
+  }
+
+  @Get('get')
+  getAllFabricator() {
+    return this.fabricatorService.getAllFabricator()
   }
 }
