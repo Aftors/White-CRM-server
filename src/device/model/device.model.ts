@@ -4,10 +4,12 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   Table,
 } from 'sequelize-typescript'
 import { Fabricator } from 'src/fabricator/models/fabricator.model'
+import { Order } from 'src/order/models/order.model'
 
 interface DeviceAttrs {
   deviceModel: string
@@ -34,4 +36,7 @@ export class Device extends Model<Device, DeviceAttrs> {
 
   @BelongsTo(() => Fabricator)
   fabricator: Fabricator[]
+
+  @HasMany(() => Order)
+  orders: Order[]
 }

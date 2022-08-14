@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript'
 import { Device } from 'src/device/model/device.model'
+import { Order } from 'src/order/models/order.model'
 
 interface FabricatorAttrs {
   fabricator: string

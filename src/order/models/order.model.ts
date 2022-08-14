@@ -9,12 +9,13 @@ import {
 import { Status } from 'src/status/models/status.model'
 import { Customers } from 'src/customers/models/customers.model'
 import { ApiProperty } from '@nestjs/swagger'
+import { Device } from 'src/device/model/device.model'
 
 interface OrderCreationAttrs {
   numOrder: number
   deviceSN: string
-  prePayment: number
-  prePrice: number
+  prePayment: string
+  prePrice: string
   descriptionDamage: string
   descriptionDevice: string
 }
@@ -30,8 +31,8 @@ export class Order extends Model<Order, OrderCreationAttrs> {
   id: number
 
   @ApiProperty({ example: '1386', description: 'Уникальный номер заказа' })
-  @Column({ type: DataType.STRING, allowNull: false, unique: true })
-  numOrder: string
+  @Column({ type: DataType.INTEGER, allowNull: false, unique: true })
+  numOrder: number
 
   @ApiProperty({
     example: 'c01f7sa8',
@@ -41,12 +42,12 @@ export class Order extends Model<Order, OrderCreationAttrs> {
   deviceSN: string
 
   @ApiProperty({ example: '1400', description: 'предоплата' })
-  @Column({ type: DataType.INTEGER })
-  prePayment: number
+  @Column({ type: DataType.STRING })
+  prePayment: string
 
   @ApiProperty({ example: '5400', description: 'Предварительная цена' })
-  @Column({ type: DataType.INTEGER })
-  prePrice: number
+  @Column({ type: DataType.STRING })
+  prePrice: string
 
   @ApiProperty({ example: 'Не включается', description: 'Описание проблемы' })
   @Column({ type: DataType.STRING })
@@ -62,6 +63,13 @@ export class Order extends Model<Order, OrderCreationAttrs> {
   @ForeignKey(() => Status)
   @Column({ type: DataType.INTEGER })
   statusId: number
+
+  @ForeignKey(() => Device)
+  @Column({ type: DataType.INTEGER })
+  deviceId: number
+
+  @BelongsTo(() => Device)
+  deviceModel: Device[]
 
   @BelongsTo(() => Status)
   status: Status[]

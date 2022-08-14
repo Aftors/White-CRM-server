@@ -1,12 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger'
 
 export class CreateOrderDto {
-  @ApiProperty({
-    example: '1386',
-    description: 'Уникальный номер заказа',
-    required: true,
-  })
-  readonly numOrder: number
+  @ApiProperty({ example: '1386', description: 'Уникальный номер заказа' })
+  numOrder: number
 
   @ApiProperty({ example: 'true', description: 'Физ Юр лицо' })
   readonly legalEntity: boolean
@@ -28,14 +24,14 @@ export class CreateOrderDto {
   readonly deviceSN?: string
 
   @ApiProperty({ example: '1400', description: 'предоплата', required: false })
-  readonly prepayment?: number
+  readonly prePayment?: string
 
   @ApiProperty({
     example: '5400',
     description: 'Предварительная цена',
     required: false,
   })
-  readonly prePrice?: number
+  readonly prePrice?: string
 
   @ApiProperty({
     example: 'Не включается',
@@ -50,4 +46,11 @@ export class CreateOrderDto {
     required: false,
   })
   readonly descriptionDevice?: string
+
+  @ApiProperty({
+    example: 'A1466',
+    description: 'название модели',
+    required: false,
+  })
+  readonly deviceModel: string
 }
